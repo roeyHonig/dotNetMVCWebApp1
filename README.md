@@ -131,6 +131,43 @@ with your GitHub username.
 
 ---
 
+# Step 5.5: Add a standard .gitignore
+
+Ask the GitHub Copilot for the following:
+Add a `.gitignore` file in the project root with common .NET and MVC exclusions before pushing the project.
+
+Example `.gitignore` content:
+
+```gitignore
+# Build output
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+
+# VS Code
+.vscode/
+
+# NuGet
+*.nupkg
+.nuget/
+
+# Local settings
+appsettings.Development.json
+.env
+
+# Logs and temp files
+*.log
+*.tmp
+```
+
+This keeps build artifacts, IDE settings, and local secrets out of Git.
+
+---
+
 # Step 6: Run the Application
 
 Start the web application:
