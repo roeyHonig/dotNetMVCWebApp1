@@ -204,3 +204,9 @@ The actual build tools, SDKs, runtime, and development environment run entirely 
 This makes it easy to develop .NET applications even on systems where installing the SDK locally is difficult or unsupported.
 
 ---
+
+# Step 7: Deploy to Railway
+
+Railway is a Platform-as-a-Service that can build and publish your ASP.NET application automatically. After connecting your GitHub repository, Railway will detect the project, run the build, and provide a public default URL so your app is online without manually configuring servers.
+
+When Railway deploys the project, it uses your repository source and makes the app accessible via a Railway-managed domain. This is an easy way to share a live version of your lesson or demo site with students.
