@@ -210,3 +210,44 @@ This makes it easy to develop .NET applications even on systems where installing
 Railway is a Platform-as-a-Service that can build and publish your ASP.NET application automatically. After connecting your GitHub repository, Railway will detect the project, run the build, and provide a public default URL so your app is online without manually configuring servers.
 
 When Railway deploys the project, it uses your repository source and makes the app accessible via a Railway-managed domain. This is an easy way to share a live version of your lesson or demo site with students.
+
+---
+
+# 💡 Helpful Tip: Sharing Your Project with ChatGPT
+
+When asking ChatGPT for help with your ASP.NET MVC project, it is often useful to share the project's folder structure.
+
+From the project root, run:
+
+```bash
+tree -I 'bin|obj|lib'
+```
+
+This displays the project's source folders and files while hiding:
+
+* `bin/` (build output)
+* `obj/` (temporary build files)
+* `lib/` (third-party client libraries)
+
+Example output:
+
+```text
+.
+├── Controllers
+├── Models
+├── Views
+├── wwwroot
+├── Program.cs
+├── appsettings.json
+└── MyModernWebApp.csproj
+```
+
+Copy and paste the output into your ChatGPT conversation. This helps ChatGPT understand your project's structure and provide more accurate guidance for:
+
+* Debugging issues
+* Adding new features
+* Understanding MVC architecture
+* Navigating files
+* Refactoring code
+
+For even better assistance, include the relevant source files along with the project tree.
