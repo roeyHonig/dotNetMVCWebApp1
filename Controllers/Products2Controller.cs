@@ -1,4 +1,5 @@
 using dotNetMVCWebApp1.Models;
+using dotNetMVCWebApp1.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace dotNetMVCWebApp1.Controllers;
@@ -80,5 +81,52 @@ public class Products2Controller : ControllerBase
             query = query.Where(p => p.Price <= maxPrice);
 
         return Ok(query);
+    }
+
+    [HttpPost]
+    public IActionResult Create(CreateProductRequest request)
+    {
+        var product = new Product
+        {
+            Id = products.Max(p => p.Id) + 1,
+            Name = request.Name,
+            Price = request.Price
+        };
+
+        products.Add(product);
+
+        return CreatedAtAction(
+            nameof(GetProductById),
+            new { id = product.Id },
+            product);
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult Update(
+        int id,
+        CreateProductRequest request)
+    {
+        var product = products.FirstOrDefault(p => p.Id == id);
+
+        if (product == null)
+            return NotFound();
+
+        product.Name = request.Name;
+        product.Price = request.Price;
+
+        return Ok(product);
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+        var product = products.FirstOrDefault(p => p.Id == id);
+
+        if (product == null)
+            return NotFound();
+
+        products.Remove(product);
+
+        return NoContent();
     }
 }

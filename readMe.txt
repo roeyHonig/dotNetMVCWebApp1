@@ -44,3 +44,19 @@ Query parms are usally being used for filtering, paging, sorting
 
 
 Multiple query parms - /api/products2/filter?minPrice=80&maxPrice=500
+
+
+POST - create new entites
+DTO - Data Transfer Object - only data properties no logic - ment to transfer data between different layers of the app BE <-> FE
+Why not use the entire entity - securty, we might not want to expose all the fileds
+During POST requests the controller converts the json in the request body to the DTO via model binding
+
+
+| Action           | HTTP Verb | URL                             |
+| ---------------- | --------- | ------------------------------- |
+| Get all products | GET       | `/api/products`                 |
+| Get a product    | GET       | `/api/products2/{id}`           |
+| Search           | GET       | `/api/products2/search?name=...`|
+| Create a product | POST      | `/api/products2`                |
+| Update a product | PUT       | `/api/products2/{id}`           |
+| Delete a product | DELETE    | `/api/products2/{id}`           |
