@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace MyMvcApp.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]")] // If the class name is "ProductsController" the route will be "api/products"
 // ControllerBase and not Controller because it's only API and doesn't need view support
 public class ProductsController : ControllerBase
 {
-    [HttpGet]
+    [HttpGet] // GET request
     public IActionResult GetProducts()
     {
         return Ok(new[]
