@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace MyMvcApp.Controllers;
+namespace dotNetMVCWebApp1.Controllers;
 
 [ApiController]
 [Route("api/[controller]")] // If the class name is "ProductsController" the route will be "api/products"
