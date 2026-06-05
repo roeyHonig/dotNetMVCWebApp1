@@ -86,6 +86,12 @@ public class Products2Controller : ControllerBase
     [HttpPost]
     public IActionResult Create(CreateProductRequest request)
     {
+        if (!ModelState.IsValid)
+        {
+            // Automatically returns 400 Bad Request with the validation errors
+            return BadRequest(ModelState);
+        }
+        
         var product = new Product
         {
             Id = products.Max(p => p.Id) + 1,
