@@ -111,7 +111,4 @@ GET /api/products3
 
 --------------------------------------------------
 
-5. Swagger Demo
-- Use "Authorize" button
-- Paste: Bearer <JWT>
-- Swagger attaches token automatically to requests
+use https://www.jwt.io/ to decode JWT
