@@ -60,3 +60,58 @@ During POST requests the controller converts the json in the request body to the
 | Create a product | POST      | `/api/products2`                |
 | Update a product | PUT       | `/api/products2/{id}`           |
 | Delete a product | DELETE    | `/api/products2/{id}`           |
+
+
+
+
+
+JWT Authentication – Summary
+
+1. Login
+- Client sends username + password to /api/auth/login
+- Server validates credentials
+- If valid → server generates JWT token
+
+JWT contains:
+- Header (algorithm)
+- Payload (user info / claims)
+- Signature (signed with server secret)
+
+Server returns:
+{
+  "token": "<JWT>"
+}
+
+--------------------------------------------------
+
+2. Using the Token
+- Client stores the token
+- Sends it on every request:
+
+Authorization: Bearer <JWT>
+
+Example:
+GET /api/products3
+
+--------------------------------------------------
+
+3. Server Validation Flow
+- ASP.NET Core Authentication Middleware intercepts request
+- Validates:
+  - Signature is correct
+  - Token is not expired
+- If valid → request continues to controller
+- If invalid → request is rejected
+
+--------------------------------------------------
+
+4. Authorization Results
+- No/invalid token → 401 Unauthorized
+- Valid token → 200 OK (access granted)
+
+--------------------------------------------------
+
+5. Swagger Demo
+- Use "Authorize" button
+- Paste: Bearer <JWT>
+- Swagger attaches token automatically to requests
