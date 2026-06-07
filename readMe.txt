@@ -1,3 +1,34 @@
+REST API
+    ↓
+HTTP Verbs
+    ↓
+Controllers
+    ↓
+Swagger
+    ↓
+DTOs
+    ↓
+Validation
+    ↓
+Authentication (JWT)
+    ↓
+Authorization (RBAC)
+    ↓
+OAuth2 (Conceptual)
+    ↓
+Blazor / Front-End
+    ↓
+Google Login Demo
+
+
+
+
+
+
+
+
+
+
 My 1st API end point - /api/products
 
 How does ASP.NET that when a request to `api/products` the GetProducts() is to be called?
