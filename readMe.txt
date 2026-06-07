@@ -112,3 +112,148 @@ GET /api/products3
 --------------------------------------------------
 
 use https://www.jwt.io/ to decode JWT
+
+
+
+==========================
+JWT (Local Authentication)
+==========================
+
+Client
+  |
+  | 1. Login (username/password)
+  v
+Auth Server (your API)
+  |
+  | 2. Validate credentials
+  |
+  | 3. Generate JWT (signed locally)
+  v
+Client receives JWT
+  |
+  | 4. Send request with:
+  |    Authorization: Bearer <JWT>
+  v
+API Middleware (ASP.NET Core)
+  |
+  | 5. Validate token locally:
+  |    - Verify signature (secret key)
+  |    - Check expiration
+  |    - Check claims (roles)
+  |
+  | 6. If valid → continue
+  | 7. If invalid → reject (401/403)
+  v
+Controller executes logic
+
+
+Key idea:
+- No external calls
+- Fully stateless
+- Fast validation
+
+
+
+=========================================
+OAuth2 / OpenID Connect (External Provider)
+=========================================
+
+Client
+  |
+  | 1. Login via external provider (Google)
+  v
+Google / Identity Provider
+  |
+  | 2. Authenticate user
+  | 3. Issue Access Token / ID Token
+  v
+Client receives external token
+  |
+  | 4. Send request to your API:
+  |    Authorization: Bearer <Google Token>
+  v
+API Middleware (ASP.NET Core)
+  |
+  | 5. Validate token:
+  |    Option A (common):
+  |      - Validate signature using Google's public keys (JWKS)
+  |      - Check expiration + issuer + audience
+  |
+  |    Option B (less common):
+  |      - Call Google introspection endpoint
+  |      - Ask: "Is this token still valid?"
+  |
+  | 6. If valid → continue
+  | 7. If invalid → reject (401/403)
+  v
+Controller executes logic
+
+
+Key idea:
+- Identity handled externally
+- May require external metadata (public keys)
+- Slight overhead vs local JWT
+
+
+
+==========================
+MAIN DIFFERENCE (IMPORTANT)
+==========================
+
+JWT (self-issued):
+- You validate locally
+- No network call needed
+- Fast
+- Stateless
+
+OAuth2 (external provider):
+- Token issued by external system (Google, Microsoft, etc.)
+- Validation may use external public keys or introspection
+- More flexible
+- Supports SSO (Single Sign-On)
+
+
+
+
+
+
+=========================================
+RBAC + OAuth2 (Google example)
+=========================================
+
+User
+  |
+  | 1. Login with Google
+  v
+Google Identity Provider
+  |
+  | 2. Authenticate user
+  |    (returns user identity, e.g. email, name, sub)
+  v
+Your API / Server
+  |
+  | 3. Lookup user in local database
+  |    (map Google identity → roles in your system)
+  |
+  |    Example database table:
+  |    -------------------------------------
+  |    GoogleId      Email                Role
+  |    -------------------------------------
+  |    123456789     john@example.com     Admin
+  |    987654321     jane@example.com     User
+  |
+  v
+Determine role for user
+  |
+  | 4. Generate local JWT including role claim:
+  |      - ClaimTypes.Name → user email
+  |      - ClaimTypes.Role → role from database
+  v
+Client receives JWT
+  |
+  | 5. Subsequent requests to API:
+  |      - Include JWT in Authorization header
+  |      - ASP.NET Core validates signature + expiration
+  |      - [Authorize(Roles = "...")] enforces permissions
+  v
+Controller executes authorized logic
