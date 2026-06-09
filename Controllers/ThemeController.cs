@@ -6,7 +6,7 @@ namespace dotNetMVCWebApp1.Controllers;
 [Route("api/[controller]")]
 public class ThemeController : ControllerBase
 {
-    [HttpGet("theme")]
+    [HttpGet]
     public IActionResult GetTheme()
     {
         var theme = Request.Cookies["theme"] ?? "not-detected";
