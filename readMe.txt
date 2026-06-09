@@ -287,4 +287,4 @@ Client receives JWT
   |      - ASP.NET Core validates signature + expiration
   |      - [Authorize(Roles = "...")] enforces permissions
   v
-Controller executes authorized logic
+Controller executes authorized logic.
