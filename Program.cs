@@ -56,6 +56,7 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader();
     });
 });
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -83,4 +84,6 @@ app.MapControllerRoute(
 
 app.UseSwagger();
 app.UseSwaggerUI();
+// Add SignalR endpoint
+app.MapHub<SimpleHub>("/simpleHub");
 app.Run();
