@@ -251,3 +251,33 @@ Copy and paste the output into your ChatGPT conversation. This helps ChatGPT und
 * Refactoring code
 
 For even better assistance, include the relevant source files along with the project tree.
+
+---
+
+# 💡 Helpful Tip: Using Gemini CLI in the Codespace Terminal
+
+The Gemini CLI is an interactive assistant that can help you with your ASP.NET Core MVC project directly within your Codespaces terminal.
+
+### Step 1: Set the API Key as an Environment Variable
+To configure your API key for the current terminal session, run the following command (replace `<YOUR_API_KEY>` with your actual Gemini API key):
+
+```bash
+export GEMINI_API_KEY="<YOUR_API_KEY>"
+```
+
+> ⚠️ **Security Warning:** Never write or commit your actual API key directly into repository files (like `README.md`, code, or config files). Always set it via environment variables or a secure `.env` file that is excluded in your `.gitignore`.
+
+### Step 2: Start the Gemini CLI Session
+Once the environment variable is configured, launch the interactive CLI chat session by running:
+
+```bash
+gemini
+```
+
+This starts the chat session where you can ask questions about the codebase, troubleshoot errors, and request feature implementations.
+
+### Step 3: Close the Gemini CLI Session
+To exit the interactive chat session, you can:
+* Type `exit` or `quit` and press `Enter`.
+* Press `Ctrl + D` on your keyboard.
+* Press `Ctrl + C` to force interrupt the session.

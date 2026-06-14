@@ -19,6 +19,8 @@ public class AuthController : ControllerBase
         // simple demo users
         if (request.Username == "admin" && request.Password == "123")
             role = "Admin";
+        else if (request.Username == "roey" && request.Password == "123")
+            role = "Admin";
         else if (request.Username == "user" && request.Password == "123")
             role = "User";
         else
